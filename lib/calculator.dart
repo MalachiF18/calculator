@@ -23,24 +23,27 @@ class Calculator extends StatelessWidget {
   @override
   Widget /*!*/ build(BuildContext context) {
     return MaterialApp(
-      title: 'Calculator',
+      title: 'Malachi x Codex Calculator',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        useMaterial3: false,
+        primarySwatch: Colors.indigo,
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.green,
-          accentColor: Colors.green[600],
+          primarySwatch: Colors.indigo,
+          accentColor: Colors.indigo[600],
           brightness: Brightness.light
         ),
       ),
       darkTheme: ThemeData(
+        useMaterial3: false,
         brightness: Brightness.dark,
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.indigo,
         
         scaffoldBackgroundColor: Colors.blueGrey[900],
         colorScheme: ColorScheme.fromSwatch(
           backgroundColor: Colors.blueGrey[900],
-          primarySwatch: Colors.green,
-          accentColor: Colors.green[600],
+          primarySwatch: Colors.indigo,
+          accentColor: Colors.indigo[600],
           brightness: Brightness.dark
         ),
       ),
@@ -74,8 +77,8 @@ class _CalculatorHomeState extends State<CalculatorHome> {
   final textFieldPadding = EdgeInsets.only(right: 8.0);
   static TextStyle textFieldTextStyle =
       TextStyle(fontSize: 80.0, fontWeight: FontWeight.w300);
-  Color _numColor = Color.fromRGBO(48, 47, 63, .94);
-  Color _opColor = Color.fromRGBO(22, 21, 29, .93);
+  Color _numColor = Color(0xFF242B4A);
+  Color _opColor = Color(0xFF171D35);
   double? _fontSize = textFieldTextStyle.fontSize;
   static const _twoPageBreakpoint = 640;
   // Controllers
@@ -362,8 +365,22 @@ class _CalculatorHomeState extends State<CalculatorHome> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(24),
+          child: Padding(
+            padding: EdgeInsets.only(bottom: 8),
+            child: SelectableText(
+              'github.com/MalachiF18/calculator',
+              style: TextStyle(fontSize: 12, color: Color(0xFFB8C1FF)),
+            ),
+          ),
+        ),
         title: Row(
           children: [
+            const Expanded(
+              child: Text('Malachi × Codex',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+            ),
             TextButton(
               onPressed: () => setState(() => _useRadians = !_useRadians),
               child: Text(_useRadians ? 'RAD' : 'DEG',
@@ -425,7 +442,7 @@ class _CalculatorHomeState extends State<CalculatorHome> {
                             style: TextStyle(
                               color: _secondaryErrorType == _messageMode.ERROR ? Colors.red
                               : _secondaryErrorType == _messageMode.WARNING ? Colors.amber
-                              : _secondaryErrorType == _messageMode.NOTICE ? Theme.of(context).textTheme.bodyText1?.color
+                              : _secondaryErrorType == _messageMode.NOTICE ? Theme.of(context).textTheme.bodyLarge?.color
                               : _secondaryErrorType == _messageMode.EASTER_EGG ? Colors.lightBlue
                               : Colors.red, //even though this slot will never be used
                               fontSize: 20.0,

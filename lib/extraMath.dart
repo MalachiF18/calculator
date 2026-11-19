@@ -20,13 +20,13 @@ double log10(num x) {
 }
 
 int factorial(int number) {
-  int factorialRange(int bottom, int top) {
-    if (top == bottom) {
-      return bottom;
-    }
-
-    return top * factorialRange(bottom, top - 1);
+  if (number < 0) {
+    throw ArgumentError.value(number, 'number', 'Must be non-negative');
   }
-
-  return factorialRange(1, number);
+  // The empty product is one, so this also handles 0! correctly.
+  var result = 1;
+  for (var factor = 2; factor <= number; factor++) {
+    result *= factor;
+  }
+  return result;
 }
